@@ -1,0 +1,10 @@
+# Override language detection for specific files
+*.blade.php linguist-language=PHP
+
+# Mark vendor files as vendored to exclude from language stats  
+todo-laravel/vendor/** linguist-vendored
+todo-next/node_modules/** linguist-vendored
+
+# Documentation files
+*.md linguist-documentation
+docs/** linguist-documentation 
