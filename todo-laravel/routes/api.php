@@ -17,6 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Todo routes
     Route::prefix('todos')->group(function () {
         Route::get('', [TodoController::class, 'index']);
+        Route::get('/export', [TodoController::class, 'exportTodos']);
+        Route::post('/import', [TodoController::class, 'importTodos']);
         Route::get('/{todo}', [TodoController::class, 'show']);
         Route::post('', [TodoController::class, 'store']);
         Route::put('/{todo}', [TodoController::class, 'update']);
