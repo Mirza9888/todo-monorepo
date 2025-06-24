@@ -1,0 +1,48 @@
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+
+const api = axios.create({
+    baseURL: API_URL,
+    timeout: 10000,
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+});
+
+// Request interceptor
+api.interceptors.request.use(
+    (config) => {
+        const token = Cookies.get('token');
+        if (token && config.headers) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+// Response interceptor
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            console.log('Authentication error:', error.response.data);
+            // Only redirect if we're not already on the login page
+            if (!window.location.pathname.includes('/login')) {
+                // Handle unauthorized access
+                Cookies.remove('token');
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default api; 
