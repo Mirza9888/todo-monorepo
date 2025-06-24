@@ -24,13 +24,19 @@ This monorepo contains:
 git clone git@github.com:Mirza9888/todo-monorepo.git
 cd todo-monorepo
 
+# Setup SSL certificates for HTTPS (required)
+./setup-ssl.sh
+
 # Start all services
-docker-compose up -d
+docker compose up -d
 
 # Access the applications
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:8000
+# Frontend: https://localhost:8443 (HTTPS)
+# Backend API: https://localhost:8443/api (HTTPS)
+# Alternative HTTP access: http://localhost:80
 ```
+
+**Note**: The application now uses HTTPS by default. You may see a browser security warning for the self-signed certificate, which you can safely ignore in development.
 
 ### Local Development
 
@@ -48,8 +54,22 @@ php artisan serve
 ```bash
 cd todo-next
 npm install
+
+# Set the API URL environment variable
+export NEXT_PUBLIC_API_URL=https://localhost:8443/api
+# or create a .env.local file with:
+# NEXT_PUBLIC_API_URL=https://localhost:8443/api
+
 npm run dev
 ```
+
+## 🔐 Environment Variables
+
+The application requires the following environment variable to be set:
+
+- `NEXT_PUBLIC_API_URL`: The base URL for the API (e.g., `https://localhost:8443/api`)
+
+This variable is configured automatically in Docker, but must be set manually for local development.
 
 ## 📁 Project Structure
 
@@ -64,6 +84,8 @@ todo-monorepo/
 │   ├── routes/
 │   └── composer.json
 ├── Docker/             # Docker configurations
+├── certbot/            # SSL certificates directory
+├── setup-ssl.sh       # SSL setup script
 ├── docker-compose.yml  # Multi-service setup
 └── README.md
 ```
@@ -75,6 +97,7 @@ todo-monorepo/
 - **Real-time Updates**: Modern UI with React
 - **API**: RESTful Laravel API
 - **Docker**: Containerized development environment
+- **HTTPS**: SSL/TLS encryption for secure communication
 
 ## 🌐 Tech Stack
 
@@ -93,7 +116,8 @@ todo-monorepo/
 ### DevOps
 - Docker
 - Docker Compose
-- Nginx
+- Nginx with SSL/TLS
+- Let's Encrypt (Certbot) for SSL certificates
 
 ## 📝 License
 
