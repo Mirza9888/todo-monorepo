@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shopping Todo Frontend - Next.js Application
 
-## Getting Started
+Modern, responsive frontend for the Shopping Todo application built with Next.js 14, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## 🎨 Features
+
+- **Modern UI Design**: Glassmorphism effects with smooth animations
+- **Responsive Layout**: Mobile-first design that works on all devices
+- **Real-time Updates**: Dynamic todo management with instant feedback
+- **Priority System**: Color-coded priority levels (High, Medium, Low)
+- **Data Management**: Import/Export functionality for todo lists
+- **Secure Authentication**: JWT-based login with protected routes
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18 or later
+- npm, yarn, pnpm, or bun
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.local.example .env.local
+# Edit .env.local and add your API URL:
+# NEXT_PUBLIC_API_URL=https://localhost:8443/api
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe JavaScript development
+- **Tailwind CSS** - Utility-first CSS framework
+- **Axios** - HTTP client for API communication
+- **React Hooks** - Modern state management
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                # Next.js App Router pages
+├── components/         # Reusable UI components
+├── contexts/          # React Context providers
+├── lib/               # Utility functions and configurations
+├── sections/          # Page-specific components
+│   ├── dashboard/     # Main todo dashboard
+│   └── login/         # Authentication forms
+└── services/          # API service layers
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 Key Components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Dashboard View**: Main todo management interface with sorting and filtering
+- **Login View**: Secure authentication with modern UI
+- **Todo Service**: API integration layer for all todo operations
+- **Auth Context**: Global authentication state management
 
-## Deploy on Vercel
+## 🚢 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application is containerized and can be deployed using Docker:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+For containerized deployment, see the main project README.
+
+## 📝 Environment Variables
+
+Required environment variables:
+
+- `NEXT_PUBLIC_API_URL` - Backend API base URL
+
+## 🔗 Related
+
+This frontend works with the Laravel backend located in `../todo-laravel/`.

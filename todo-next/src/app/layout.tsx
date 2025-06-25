@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Todo App",
-  description: "A simple todo application with authentication",
+  title: "Shopping Todo - Smart Shopping List Manager",
+  description: "Modern shopping list application with priority management, secure authentication, and real-time updates. Built with Next.js and Laravel.",
 };
 
 export default function RootLayout({

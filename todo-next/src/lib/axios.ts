@@ -37,11 +37,8 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            console.log('Authentication error:', error.response.data);
-            // Only redirect if we're not already on the login page
-            if (!window.location.pathname.includes('/login')) {
-                // Handle unauthorized access
-                Cookies.remove('token');
+            // Silent redirect to login - no console logging in production
+            if (typeof window !== 'undefined') {
                 window.location.href = '/login';
             }
         }
