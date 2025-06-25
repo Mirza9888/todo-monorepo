@@ -1,5 +1,121 @@
 @import "tailwindcss";
 
+/* AGGRESSIVE OUTLINE REMOVAL - HIGHEST PRIORITY */
+* {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+}
+
+*:focus,
+*:active,
+*:focus-visible,
+*:focus-within,
+*:hover,
+*:target {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+}
+
+/* SPECIFIC SELECT ELEMENT TARGETING */
+select,
+select *,
+select:focus,
+select:active,
+select:focus-visible,
+select:focus-within,
+select:hover,
+select:target,
+.input-modern,
+.input-modern:focus,
+.input-modern:active,
+.input-modern:focus-visible,
+.input-modern:focus-within {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* FORM SECTION SPECIFIC */
+.form-section,
+.form-section *,
+.form-section select,
+.form-section input,
+.form-section *:focus,
+.form-section *:active,
+.form-section *:focus-visible,
+.form-section *:focus-within {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+}
+
+/* WEBKIT SPECIFIC OUTLINE REMOVAL */
+*::-webkit-focus-inner,
+*::-webkit-focus-ring,
+*::-webkit-focus-ring-color {
+  outline: none !important;
+  border: none !important;
+}
+
+/* MOZILLA SPECIFIC OUTLINE REMOVAL */
+*::-moz-focus-inner,
+*::-moz-focus-outer {
+  outline: none !important;
+  border: none !important;
+}
+
+/* COMPLETE FOCUS RING ELIMINATION */
+html *,
+html *:focus,
+html *:active,
+html *:focus-visible {
+  outline: 0 !important;
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  box-shadow: none;
+}
+
+/* TAILWIND OVERRIDE */
+.focus\:outline-none:focus,
+.focus\:ring-0:focus,
+.focus\:ring-transparent:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ACCESSIBILITY OVERRIDE (removes screen reader outlines) */
+*[tabindex]:focus,
+*[tabindex]:active,
+button:focus,
+button:active,
+input:focus,
+input:active,
+select:focus,
+select:active,
+textarea:focus,
+textarea:active {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -358,4 +474,334 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+/* Enhanced Form Styling for Dashboard */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.form-group::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.05), rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+  border-radius: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.form-group:focus-within::before {
+  opacity: 1;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.form-label span {
+  font-size: 1.125rem;
+}
+
+.form-group:focus-within .form-label {
+  color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* Enhanced Input Styling */
+.input-modern {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(209, 213, 219, 0.8);
+  border-radius: 1rem;
+  outline: none;
+  transition: all 0.5s ease;
+  font-weight: 500;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(4px);
+  font-size: 1rem;
+}
+
+.input-modern:hover {
+  background: white;
+  border-color: rgba(147, 197, 253, 0.6);
+}
+
+.input-modern:focus {
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.25);
+  background: white;
+  transform: scale(1.02);
+  outline: none;
+}
+
+.input-modern::placeholder {
+  color: #9ca3af;
+  transition: all 0.3s ease;
+}
+
+.input-modern:focus::placeholder {
+  color: #d1d5db;
+}
+
+/* Enhanced Select Styling */
+select.input-modern {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.95);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 3rem;
+}
+
+select.input-modern:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.25);
+}
+
+select.input-modern option {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background: white;
+  color: #374151;
+}
+
+/* Remove unwanted outlines from all select elements */
+select:focus,
+select:active,
+select:focus-visible {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+
+/* Additional comprehensive outline removal for all form elements */
+select,
+select.input-modern,
+input,
+input.input-modern,
+textarea,
+button {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Specific targeting for select elements */
+select::-ms-expand {
+  display: none;
+}
+
+select:focus,
+select:active,
+select:hover,
+select:focus-visible,
+select:focus-within {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.25) !important;
+}
+
+/* Override any potential Tailwind outline classes */
+.input-modern:focus,
+.input-modern:active,
+.input-modern:focus-visible,
+.input-modern:focus-within {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+}
+
+/* Enhanced Card Styling */
+.card-modern {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  transition: all 0.7s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-modern:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.card-modern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent, rgba(219, 234, 254, 0.3));
+  border-radius: 1.5rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-modern > * {
+  position: relative;
+  z-index: 10;
+}
+
+/* Enhanced Button Styling */
+.btn-modern {
+  background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+  color: white;
+  border-radius: 1rem;
+  transition: all 0.5s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-modern:hover {
+  background: linear-gradient(90deg, #1d4ed8, #4338ca, #6d28d9);
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.btn-modern:hover::before {
+  opacity: 1;
+}
+
+.btn-modern:active {
+  transform: scale(0.95);
+}
+
+/* Enhanced outline button for import */
+.btn-outline-modern {
+  background: rgba(255, 255, 255, 0.9);
+  color: #374151;
+  border: 2px solid rgba(209, 213, 219, 0.6);
+  border-radius: 1rem;
+  transition: all 0.5s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-outline-modern:hover {
+  background: white;
+  border-color: rgba(147, 197, 253, 0.8);
+  color: #2563eb;
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive enhancements for forms */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .input-modern {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  .card-modern {
+    padding: 1.5rem;
+  }
+}
+
+/* SUPER AGGRESSIVE OUTLINE REMOVAL FOR SELECT ELEMENTS */
+select:focus,
+select:focus-visible,
+select:focus-within,
+select:active,
+select[class*="input-modern"]:focus,
+select[class*="input-modern"]:focus-visible,
+select[class*="input-modern"]:focus-within,
+select[class*="input-modern"]:active,
+.input-modern:focus,
+.input-modern:focus-visible,
+.input-modern:focus-within,
+.input-modern:active {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.25) !important;
+  border: 2px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Remove default browser outline on ALL elements as nuclear option */
+* {
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+*:focus-visible {
+  outline: none !important;
+}
+
+/* Custom focus for our input elements only */
+.input-modern:focus {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15), 0 0 20px rgba(59, 130, 246, 0.25) !important;
+  border: 2px solid rgba(59, 130, 246, 0.4) !important;
 }
